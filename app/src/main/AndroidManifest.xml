@@ -11,7 +11,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.FalHafez">
         <activity
-            android:name=".shaeran"
+            android:name="shaeran"
             android:exported="false" />
         <activity
             android:name=".fal"

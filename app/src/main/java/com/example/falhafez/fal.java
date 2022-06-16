@@ -2,8 +2,10 @@ package com.example.falhafez;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -61,5 +63,51 @@ public class fal extends AppCompatActivity {
 
             }
         });
+    }
+    public void refresh(View view){
+        txttitle=findViewById(R.id.ghazalnumber);
+        txtghazal=findViewById(R.id.ghazal);
+
+        //retrofit
+        Retrofit retrofit=new Retrofit.Builder().
+                baseUrl("https://ganjgah.ir/api/ganjoor/hafez/").
+                addConverterFactory(GsonConverterFactory.create()).
+                build();
+        //instance for interface
+        myAPI myapi=retrofit.create(myAPI.class);
+        Call<datamodel> call=myapi.getdata();
+        call.enqueue(new Callback<datamodel>() {
+            @Override
+            public void onResponse(Call<datamodel> call, Response<datamodel> response) {
+
+                //checking fo the respons
+                if (response.code() != 200){
+                    txttitle.setText("check the connection");
+                    return;
+                }
+
+                //get the datad into text
+                txttitle.setText("");
+                String title="";
+                title = response.body().getTitle();
+
+                txtghazal.setText("");
+                String ghazal="";
+                ghazal = response.body().getPlainText();
+
+
+                txttitle.append(title);
+                txtghazal.append(ghazal);
+            }
+
+            @Override
+            public void onFailure(Call<datamodel> call, Throwable t) {
+
+            }
+        });
+    }
+    public void back(View v){
+        Intent intent=new Intent(fal.this,MainActivity.class);
+        startActivity(intent);
     }
 }
