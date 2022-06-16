@@ -1,15 +1,13 @@
 package com.example.falhafez;
 
-import com.google.gson.annotations.SerializedName;
-
 public class post {
 
     private String name;
+    private String birthYearInLHijri;
+    private String deathYearInLHijri;
     private String birthPlace;
-    private int birthYearInLHijri;
-    private int deathYearInLHijri;
 
-    public post(String name, String birthPlace, int birthYearInLHijri, int deathYearInLHijri) {
+    public post(String name, String birthPlace, String birthYearInLHijri, String deathYearInLHijri) {
         this.name = name;
         this.birthPlace = birthPlace;
         this.birthYearInLHijri = birthYearInLHijri;
@@ -24,11 +22,13 @@ public class post {
         return birthPlace;
     }
 
-    public int getBirthYearInLHijri() {
+    public String getBirthYearInLHijri() {
+        final String birthYearInLHijri = this.birthYearInLHijri;
         return birthYearInLHijri;
     }
 
-    public int getDeathYearInLHijri() {
+    public String getDeathYearInLHijri() {
+        String deathYearInLHijri = this.deathYearInLHijri;
         return deathYearInLHijri;
     }
 }

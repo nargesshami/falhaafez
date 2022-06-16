@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface APIforlist {
 
-    @GET("/poets")
+    @GET("poets")
     Call<List<post>> getpost();
 }

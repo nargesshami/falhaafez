@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -31,8 +32,8 @@ public class shaeran extends AppCompatActivity {
         setContentView(R.layout.activity_shaeran);
 
         recyclerView=findViewById(R.id.recycle);
-
         linearLayoutManager=new LinearLayoutManager(this);
+        progressBar=findViewById(R.id.progressBar);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter=new postadapter(postList);
         recyclerView.setAdapter(adapter);
@@ -41,8 +42,7 @@ public class shaeran extends AppCompatActivity {
     }
 
     private void fetchPosts(){
-
-
+        progressBar.setVisibility(View.VISIBLE);
 
         retrofitclient.getretrofit().getpost().enqueue(new Callback<List<post>>() {
             @Override
@@ -50,8 +50,7 @@ public class shaeran extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     postList.addAll(response.body());
                     adapter.notifyDataSetChanged();
-
-
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 
@@ -61,5 +60,13 @@ public class shaeran extends AppCompatActivity {
                 Toast.makeText(shaeran.this, "eror : "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void mainpage(View v){
+        Intent intent2=new Intent(shaeran.this,MainActivity.class);
+        startActivity(intent2);
+    }
+    public void falpage(View v){
+        Intent intent=new Intent(shaeran.this,fal.class);
+        startActivity(intent);
     }
 }

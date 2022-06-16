@@ -32,10 +32,10 @@ public class postadapter extends RecyclerView.Adapter<postadapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.name.setText(postList.get(position).getName());
-        holder.birth.setText(postList.get(position).getBirthPlace());
-        holder.death.setText(postList.get(position).getDeathYearInLHijri());
-        holder.place.setText(postList.get(position).getBirthPlace());
+        holder.name.setText("نام شاعر : "+postList.get(position).getName());
+        holder.place.setText("تاریخ تولد (هجری) : "+postList.get(position).getBirthYearInLHijri());
+        holder.death.setText("تاریخ وفات (هجری) : "+postList.get(position).getDeathYearInLHijri());
+        holder.birth.setText("مکان تولد : "+postList.get(position).getBirthPlace());
 
     }
 
